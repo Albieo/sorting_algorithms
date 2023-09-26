@@ -1,6 +1,4 @@
 #include "sort.h"
-#include <stdlib.h>
-#include <stdio.h>
 
 void merge_sort_recursion(int *array, int l, int r);
 void merge_sorted_arrays(int *array, int l, int m, int r);
