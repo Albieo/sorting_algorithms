@@ -1,8 +1,8 @@
 #include "sort.h"
 
 /**
- * counting_sort - a function that sorts an array of integers in ascending order
- * using the Counting sort algorithm.
+ * counting_sort - a function that sorts an array of integers in
+ * ascending order using the Counting sort algorithm.
  *
  * @array: The unsorted array.
  * @size: The size of the array.
@@ -48,7 +48,6 @@ void counting_sort(int *array, size_t size)
 
 	for (i = 0; i < size; i++)
 	array[i] = output[i];
-
 	free(output);
 	free(count);
 }
