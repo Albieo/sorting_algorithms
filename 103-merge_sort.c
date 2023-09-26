@@ -48,31 +48,31 @@ void merge_sort_recursion(int *array, int l, int r)
 */
 void merge_sorted_arrays(int *array, int l, int m, int r)
 {
-	int left_length = m - l + 1;
-	int right_length = r - m;
+	int left_len = m - l + 1;
+	int right_len = r - m;
 	int i, j, k;
 	int *temp_left, *temp_right;
 
-	temp_left = malloc(left_length * sizeof(int));
+	temp_left = malloc(left_len * sizeof(int));
 	if (temp_left == NULL)
 		return;
 
-	temp_right = malloc(right_length * sizeof(int));
+	temp_right = malloc(right_len * sizeof(int));
 	if (temp_right == NULL)
 	{
 		free(temp_left);
 		return;
 	}
 
-	for (i = 0; i < left_length; i++)
+	for (i = 0; i < left_len; i++)
 		temp_left[i] = array[l + i];
 
-	for (i = 0; i < right_length; i++)
+	for (i = 0; i < right_len; i++)
 		temp_right[i] = array[m + 1 + i];
 
 	for (i = 0, j = 0, k = l; k <= r; k++)
 	{
-		if ((i < left_length) && (j >= right_length || temp_left[i] <= temp_right[j]))
+		if ((i < left_len) && (j >= right_len || temp_left[i] <= temp_right[j]))
 		{
 			array[k] = temp_left[i];
 			i++;
