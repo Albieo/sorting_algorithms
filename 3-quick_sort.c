@@ -1,17 +1,22 @@
 #include "sort.h"
 
+void swap(int *x, int *y);
+void quick_sort(int *array, size_t size);
+void quick_sort_recursion(int *array, int low, int high);
+int lomuto_partition(int *array, int low, int high);
+
 /**
  * swap - swaps two nodes in an array.
- * @a: the first array element.
- * @b: the second array element.
+ * @x: the first array element.
+ * @y: the second array element.
 */
-void swap(int *a, int *b)
+void swap(int *x, int *y)
 {
     int temp;
 
-    temp = *a;
-    *a = *b;
-    *b = temp;
+    temp = *x;
+    *x = *y;
+    *y = temp;
 }
 
 /**
@@ -24,27 +29,21 @@ void swap(int *a, int *b)
 */
 int lomuto_partition(int *array, int low, int high)
 {
-    int i, j, pivot;
+    int pivot_value = array[high];
+    int i, j;
 
-    pivot = high;
     i = low;
-    j = high - 1;
 
-    while (i <= j)
+    for (j = low; j < high; j++)
     {
-        while (array[i] < array[pivot])
-            i++;
-
-        while (array[j] > array[pivot])
-            j--;
-        if (i <= j)
+        if (array[j] <= pivot_value)
         {
             swap(&array[i], &array[j]);
             i++;
-            j--;
         }
     }
-    swap(&array[i], &array[pivot]);
+    swap(&array[i], &array[high]);
+
     return (i);
 }
 
@@ -57,24 +56,24 @@ int lomuto_partition(int *array, int low, int high)
 */
 void quick_sort(int *array, size_t size)
 {
-    quick_sort_helper(array, 0, size - 1);
+    quick_sort_recursion(array, 0, size - 1);
 }
 
 /**
- * quick_sort_helper - a helper function to start the algorithm.
+ * quick_sort_recursion - a helper function to start the algorithm.
  *
  * @array: the unsorted array.
  * @low: low index.
  * @high: high index.
 */
-void quick_sort_helper(int *array, int low, int high)
+void quick_sort_recursion(int *array, int low, int high)
 {
-    int pos;
+    int pivot_index;
 
     if (low < high)
     {
-        pos = lomuto_partition(array, low, high);
-        quick_sort_helper(array, low, pos - 1);
-        quick_sort_helper(array, pos + 1, high);
+        pivot_index = lomuto_partition(array, low, high);
+        quick_sort_recursion(array, low, pivot_index - 1);
+        quick_sort_recursion(array, pivot_index + 1, high);
     }
 }
